@@ -35,7 +35,7 @@ where
     F: Fn(Request<Incoming>) -> S + Send + Clone + 'static,
     S: Future<Output = ServerResult> + Send + 'static,
 {
-    let addr = SocketAddr::from(([0, 0, 0, 0], port));
+    let addr = SocketAddr::from(([0, 0, 0, 0, 0, 0, 0, 0], port));
     let listener = TcpListener::bind(addr).await?;
     let accepting = Arc::new(AtomicBool::new(false));
     let accepting2 = accepting.cheap_clone();

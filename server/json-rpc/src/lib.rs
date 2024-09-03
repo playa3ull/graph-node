@@ -44,7 +44,6 @@ impl JsonRpcServer {
             logger,
         };
         
-
         let socket_addr: SocketAddr = (IpAddr::V6(Ipv6Addr::UNSPECIFIED), port).into();
         let http_server = HttpServerBuilder::default().build(socket_addr).await?;
 
