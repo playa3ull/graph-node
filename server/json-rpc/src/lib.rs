@@ -7,7 +7,7 @@ use jsonrpsee::RpcModule;
 use serde_json::{self, Value as JsonValue};
 
 use std::collections::BTreeMap;
-use std::net::{Ipv6Addr, SocketAddr};
+use std::net::{IpAddr, Ipv6Addr, SocketAddr};
 
 type JsonRpcResult<T> = Result<T, jsonrpsee::core::Error>;
 
@@ -43,8 +43,9 @@ impl JsonRpcServer {
             node_id,
             logger,
         };
+        
 
-        let socket_addr: SocketAddr = (std::net::IpAddr::V6(Ipv6Addr::UNSPECIFIED), port).into();
+        let socket_addr: SocketAddr = (IpAddr::V6(Ipv6Addr::UNSPECIFIED), port).into();
         let http_server = HttpServerBuilder::default().build(socket_addr).await?;
 
         let mut rpc_module = RpcModule::new(state);

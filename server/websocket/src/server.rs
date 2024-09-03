@@ -6,7 +6,7 @@ use graph::{
     data::query::QueryTarget,
     prelude::{SubscriptionServer as SubscriptionServerTrait, *},
 };
-use std::net::{IpAddr, Ipv4Addr, SocketAddr};
+use std::net::{IpAddr, Ipv6Addr, SocketAddr};
 use std::sync::Mutex;
 use tokio::net::TcpListener;
 use tokio_tungstenite::accept_hdr_async;
@@ -108,7 +108,7 @@ where
             "Starting GraphQL WebSocket server at: ws://localhost:{}", port
         );
 
-        let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), port);
+        let addr = SocketAddr::new(IpAddr::V6(Ipv6Addr::UNSPECIFIED), port);
         let socket = TcpListener::bind(&addr)
             .await
             .expect("Failed to bind WebSocket port");
